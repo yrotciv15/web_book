@@ -159,7 +159,7 @@
 													<td>
 														<a th:href="@{|/manage-orderDetail?id=${order.id}|}"><button type="button" class="btn btn-info">Chi tiết</button></a>
 														<button type="button" class="btn btn-warning"
-															data-toggle="modal" th:data-target="${'#myModal_edit'+order.id}">Sửa</button>
+															data-toggle="modal" th:data-target="${'#myModal_edit'+order.id}">Duyệt</button>
 														<button type="button" class="btn btn-danger" data-toggle="modal"
 															th:data-target="${'#myModal_delete'+order.id}">Xóa</button>
 													</td>
@@ -201,11 +201,9 @@
 																	<input type="hidden" name="id" th:value="${order.id}">
 																	<div style="margin-top: 10px;">
 																		<div class="form-group">
-																			<label for="author">Trạng thái</label>
+																			<label for="status">Trạng thái</label>
 																			<select id="status" name = "status" class="form-control" style="text-transform: none;" th:value="${order.status}" required>
 																				<option>Duyệt</option>
-																				<option>Đang giao</option>
-																				<option>Thành công</option>
 																				<option>Hủy</option>
 																			</select>
 																		</div>

@@ -128,11 +128,12 @@
                                 <!-- <h2> <span>Tất cả sách  </span> </h2> -->
                                 <div>
                                 <th:block th:if="${cartInfo != null && cartInfo.cartDetails != null && !cartInfo.cartDetails.empty}">
-                                    <form method="post" th:action="@{/purchase}">
+                                    <form method="post" th:action="@{/purchase}" onsubmit="return validateForm()">
                                         <table class="styled-table">
                                             <thead>
 
                                                 <tr>
+                                                    <th></th>
                                                     <th>STT</th>
                                                     <th>Tên sách</th>
                                                     <th>Hình ảnh</th>
@@ -147,6 +148,7 @@
                                                   <tr class="active-row" th:each="detail: ${cartInfo.cartDetails}">
                                                     <input type="hidden" th:id="${'numberInStock'+cartInfo.cartDetails.indexOf(detail)}" 
                                                       th:value="${detail.book.number_in_stock}" >
+                                                        <td><input th:type="checkbox" th:name="selectedItems" id="chon" th:value="${detail.book.id}"></td>
                                                         <td th:text="${cartInfo.cartDetails.indexOf(detail)+1}"></td>
                                                         <td th:text="${detail.book.title}"></td>
                                                         <td><img th:src="@{|/bookImage?id=${detail.book.id}|}" alt="image description" style="height: 100px;"></td>
@@ -329,7 +331,34 @@
 			
 			return true; // Cho phép submit form
 		}
-	</script>
+
+        function validateForm() {
+            var checkboxes = document.getElementsByName("selectedItems");
+            var atLeastOneChecked = false;
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    atLeastOneChecked = true;
+                    break;
+                }
+            }
+
+            if (!atLeastOneChecked) {
+            // alert("Vui lòng chọn ít nhất một mục để đặt hàng.");
+                Swal.fire({
+                position: 'top',
+                icon: 'warning',
+                title: 'Vui lòng chọn ít nhất một mục để đặt hàng',
+                showConfirmButton: false,
+                timer: 1500,
+                })
+                return false; // Ngăn chặn submit form
+            }
+
+        return true; // Cho phép submit form
+    }
+
+  </script>
 </body>
 
 </html>

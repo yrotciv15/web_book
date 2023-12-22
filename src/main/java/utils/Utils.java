@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.thunga.web.model.CartInfo;
+import com.nhom7.web.model.CartInfo;
 
 public class Utils {
 	public static String getCurrentDate() {
