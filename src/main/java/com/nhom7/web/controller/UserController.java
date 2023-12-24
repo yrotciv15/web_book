@@ -63,7 +63,6 @@ AuthorService authorService;
 		model.addAttribute("book", BookInfo);
 		return "user/cart";
 	}
-	
 	@GetMapping("/remove-book")
 	public String removeBook(HttpServletRequest request,
 							@RequestParam Integer id) {
@@ -81,7 +80,15 @@ AuthorService authorService;
 		model.addAttribute("cartInfo", cartInfo);
 		return "redirect:/detail-product?id=" + id;
 	}
-	
+	@PostMapping("/buy-now")
+	public String buyNow(HttpServletRequest request, Model model,
+							@RequestParam Integer id, @RequestParam Integer quantity) {
+		CartInfo cartInfo = Utils.getCartInSession(request);
+		Book book = bookService.findById(id);
+		cartInfo.addBook(book, quantity);
+		model.addAttribute("cartInfo", cartInfo);
+		return "redirect:/view-cart";
+	}
 	@PostMapping("/purchase")
 	public String purchase(HttpServletRequest request, Model model) {
 		CartInfo cartInfo = Utils.getCartInSession(request);

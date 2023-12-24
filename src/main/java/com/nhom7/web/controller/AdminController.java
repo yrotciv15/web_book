@@ -107,16 +107,17 @@ public class AdminController {
 	public String deleteProduct(@RequestParam Integer id) {
 		Book book = bookService.findById(id);
 		List<OrderDetail> orderDetails = orderDetailService.findbyBook(book);
-		for (OrderDetail orderDetail : orderDetails){
-			Order order = orderDetail.getOrder();
-			if (order.getStatus().equals("Duyệt")){
+		if(orderDetails.isEmpty()){
+			bookService.deleteById(id);
+		}
+		else{
+			for (OrderDetail orderDetail : orderDetails){
+				Order order = orderDetail.getOrder();
 				orderDetailService.delete(orderDetail);
 				orderService.delete(order);
-				bookService.deleteById(id);
 			}
+			bookService.deleteById(id);
 		}
-
-
 
 		return "redirect:/manage-product";
 	}

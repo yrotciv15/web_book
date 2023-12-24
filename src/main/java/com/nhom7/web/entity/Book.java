@@ -2,6 +2,7 @@ package com.nhom7.web.entity;
 
 import com.nhom7.web.service.OrderService;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -65,6 +66,16 @@ public class Book {
 	@ToString.Exclude
 	private Collection<OrderDetail> orderDetailList;
 
+	public boolean checkOderDetail(){
+		Collection<OrderDetail> orderDetails = this.orderDetailList;
+		for(OrderDetail orderDetail : orderDetails){
+			Order order = orderDetail.getOrder();
+			if(order.getStatus().equals("Đang chờ duyệt")){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
 	@ToString.Exclude

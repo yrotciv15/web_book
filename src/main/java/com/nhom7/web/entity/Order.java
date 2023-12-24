@@ -27,7 +27,7 @@ import utils.Utils;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "javax")
+@Table(name = "purchase")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

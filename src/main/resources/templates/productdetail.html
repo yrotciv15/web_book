@@ -154,7 +154,21 @@
 																<div sec:authorize = "!isAuthenticated()">
 																	<a th:href="@{/login}"><div  class="tg-btn tg-active tg-btn-lg" >Thêm vào giỏ</div></a>
 																</div>
+
 															</form>
+														<form th:action="@{/buy-now}" method="post" onsubmit="return validateQuantity()">
+															<input type="hidden" th:value="${book.id}" name="id" />
+															<input type="hidden" id="numberInStock" th:value="${book.number_in_stock}" />
+															<input type="hidden" id="quantity2" name="quantity" />
+															<div sec:authorize="isAuthenticated()">
+																<button sec:authorize="!hasRole('ADMIN')" class="tg-btn tg-active tg-btn-lg" type="submit" onclick="copyQuantity()">Mua Ngay</button>
+															</div>
+															<div sec:authorize="!isAuthenticated()">
+																<a th:href="@{/login}">
+																	<div class="tg-btn tg-active tg-btn-lg" onclick="copyQuantity()">Mua Ngay</div>
+																</a>
+															</div>
+														</form>
 													</div>
 												</div>
 											</div>
@@ -425,6 +439,11 @@
 			}
 			
 			return true; // Cho phép submit form
+		}
+		function copyQuantity() {
+			var quantityValue = document.getElementById("quantity1").value;
+			// var numberInStock = document.getElementById("numberInStock").value;
+			document.getElementById("quantity2").value = quantityValue;
 		}
 	</script>
 </body>
