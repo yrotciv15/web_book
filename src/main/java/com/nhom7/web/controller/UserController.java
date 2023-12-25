@@ -1,5 +1,6 @@
 package com.nhom7.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,13 +93,21 @@ AuthorService authorService;
 	@PostMapping("/purchase")
 	public String purchase(HttpServletRequest request, Model model) {
 		CartInfo cartInfo = Utils.getCartInSession(request);
+		List<CartDetailInfo> selectedCartDetails = new ArrayList<>();
 		for(int i = 0; i < cartInfo.getCartDetails().size(); i++) {
 			String sequence = "quantity" + i;
 			Integer quantity = Integer.valueOf(request.getParameter(sequence));
 			CartDetailInfo cartDetailInfo = cartInfo.getCartDetails().get(i);
 			cartDetailInfo.setQuantity(quantity);
+			String checkboxName = "selectedItems";
+			String checkboxValue = request.getParameter(checkboxName + i);
+			if (checkboxValue != null && checkboxValue.equals(cartDetailInfo.getBook().getId().toString())) {
+				cartDetailInfo.setStatus(1);
+				selectedCartDetails.add(cartDetailInfo);
+			}
 		}
 		model.addAttribute("cartInfo", cartInfo);
+		model.addAttribute("selectedCartDetails", selectedCartDetails);
 		return "user/purchase_user";
 	}
 	
@@ -111,7 +120,6 @@ AuthorService authorService;
 		order.setUser(user);
 		order = orderService.save(order);
 		model.addAttribute("order", order);
-		Utils.removeCartInSession(request);
 		CartInfo cartInfo = Utils.getCartInSession(request);
 		model.addAttribute("cartInfo", cartInfo);
 		return "user/orderedDetail_user";

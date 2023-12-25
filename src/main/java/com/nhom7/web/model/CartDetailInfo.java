@@ -10,8 +10,11 @@ import lombok.Data;
 public class CartDetailInfo {
 	private Book book;
 	private Integer quantity;
-	
+    private Integer status;
+
+
 	public CartDetailInfo() {
+        this.status = 0;
         this.quantity = 0;
     }
     public Integer getAmount() {

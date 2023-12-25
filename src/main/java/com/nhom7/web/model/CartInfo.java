@@ -1,6 +1,7 @@
 package com.nhom7.web.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.nhom7.web.entity.Book;
@@ -65,6 +66,15 @@ public class CartInfo {
 		CartDetailInfo line = this.findLineByBookId(id);
 		this.cartDetails.remove(line);
 	}
+	public void removeCartDetailInfor(){
+		Iterator<CartDetailInfo> iterator = cartDetails.iterator();
+		while (iterator.hasNext()) {
+			CartDetailInfo cartDetailInfo = iterator.next();
+			if (cartDetailInfo.getStatus() == 1) {
+				iterator.remove(); // Sử dụng iterator để xóa phần tử an toàn
+			}
+		}
+	}
 
 	public boolean isEmpty() {
 		return this.cartDetails.isEmpty();
@@ -73,7 +83,9 @@ public class CartInfo {
 	public Integer getAmount() {
 		Integer amount = 0;
 		for (CartDetailInfo x : this.cartDetails) {
-			amount += x.getAmount();
+			if(x.getStatus() == 1){
+				amount += x.getAmount();
+			}
 		}
 		return amount;
 	}

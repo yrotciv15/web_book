@@ -59,10 +59,14 @@ public class Order {
 		this.address = request.getParameter("address");
 		this.status = "Đang chờ duyệt";
 		for(CartDetailInfo cartDetailInfo: cartInfo.getCartDetails()) {
-			OrderDetail orderDetail = new OrderDetail(cartDetailInfo);
-			orderDetail.setOrder(this);
-			this.orderDetailList.add(orderDetail);
+			if(cartDetailInfo.getStatus() == 1){
+				OrderDetail orderDetail = new OrderDetail(cartDetailInfo);
+				orderDetail.setOrder(this);
+				this.orderDetailList.add(orderDetail);
+
+			}
 		}
+		cartInfo.removeCartDetailInfor();
 		this.created_at = Utils.getCurrentDate();
 	}
 }

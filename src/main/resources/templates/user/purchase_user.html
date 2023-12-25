@@ -138,7 +138,7 @@
 									<th>Tạm tính</th> 
 								</tr>
 							
-								<tr class="active-row" th:each="detail: ${cartInfo.cartDetails}">
+								<tr class="active-row" th:each="detail: ${selectedCartDetails}">
 									<td th:text="${cartInfo.cartDetails.indexOf(detail)+1}"></td>
 									<td th:text="${detail.book.title}"></td>
 									<td th:text="${detail.quantity}"></td>
