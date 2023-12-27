@@ -251,6 +251,7 @@
 						</div>
 					</div>
 					<br>
+					// button
 					<button sec:authorize="hasRole('ADMIN')" th:if="${action.equals('create')}" type="button" class="btn btn-primary pull-right"  style="display:block;"
 							data-toggle="modal" data-target="#myModal_add" id="add-btn">Thêm</button>
 					<button sec:authorize="hasRole('ADMIN')" th:if="${!action.equals('create')}" type="button" class="btn btn-warning pull-right" id="edit-btn" style="display:block;">Sửa</button>
