@@ -251,33 +251,11 @@
 						</div>
 					</div>
 					<br>
-					<div sec:authorize="isAuthenticated()">
-						<button sec:authorize="hasRole('ADMIN')" th:if="${action.equals('create')}" type="button" class="btn btn-primary pull-right"  style="display:block;"
-								data-toggle="modal" data-target="#myModal_add" id="add-btn">Thêm</button>
-					</div>
-					<div sec:authorize="!isAuthenticated()">
-						<a  th:href="@{/login}">
-							<div class="btn btn-primary pull-right">Thêm</div>
-						</a>
-					</div>
-					<div sec:authorize="isAuthenticated()">
-						<button sec:authorize="hasRole('ADMIN')" th:if="${!action.equals('create')}" type="button" class="btn btn-warning pull-right" id="edit-btn" style="display:block;">Sửa</button>
-					</div>
-					<div sec:authorize="!isAuthenticated()">
-						<a th:href="@{/login}">
-							<div class="btn btn-warning pull-right" >Sửa</div>
-						</a>
-					</div>
-					<div sec:authorize="isAuthenticated()">
-						<button sec:authorize="hasRole('ADMIN')" th:if="${!action.equals('create')}" type="button" class="btn btn-primary pull-right" id="save-btn" style="display:block;"
-								data-toggle="modal" data-target="#myModal_save">Lưu</button>
-					</div>
-					<div sec:authorize="!isAuthenticated()">
-						<a th:href="@{/login}">
-							<div class="btn btn-primary pull-right" style="display:block;">Lưu</div>
-						</a>
-					</div>
-
+					<button sec:authorize="hasRole('ADMIN')" th:if="${action.equals('create')}" type="button" class="btn btn-primary pull-right"  style="display:block;"
+							data-toggle="modal" data-target="#myModal_add" id="add-btn">Thêm</button>
+					<button sec:authorize="hasRole('ADMIN')" th:if="${!action.equals('create')}" type="button" class="btn btn-warning pull-right" id="edit-btn" style="display:block;">Sửa</button>
+					<button sec:authorize="hasRole('ADMIN')" th:if="${!action.equals('create')}" type="button" class="btn btn-primary pull-right" id="save-btn" style="display:block;"
+							data-toggle="modal" data-target="#myModal_save">Lưu</button>
 				</div>
 			</div>
 		</div>
