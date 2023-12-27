@@ -38,6 +38,7 @@ public class BookService {
 	}
 	
 	public void deleteById(Integer id) {
+		// delete
 		bookRepository.deleteById(id);
 	}
 	
@@ -68,6 +69,7 @@ public class BookService {
 			updateBook.setDate_publication(newBook.getDate_publication());
 			updateBook.setPrice(newBook.getPrice());
 			updateBook.setUpdated_at(Utils.getCurrentDate());
+			updateBook.setNumber_in_stock(newBook.getNumber_in_stock());
 		}
 		else {
 			updateBook = newBook;

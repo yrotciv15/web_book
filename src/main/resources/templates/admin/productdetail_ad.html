@@ -237,7 +237,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-right">
 							<aside id="tg-sidebar" class="tg-sidebar">
-								<button type="button" onclick="document.getElementById('book-image').click()" class="btn btn-success"
+								<button sec:authorize="hasRole('ADMIN')" type="button" onclick="document.getElementById('book-image').click()" class="btn btn-success"
 										style="margin-left: -150px;">Upload</button>
 								<div class="tg-widget tg-widgetsearch"
 									 style="border: 2px dotted; max-width: 230px; margin-top: 70px; height: 300px; margin-left: 50px;">
@@ -251,11 +251,32 @@
 						</div>
 					</div>
 					<br>
-					<button th:if="${action.equals('create')}" type="button" class="btn btn-primary pull-right"  style="display:block;"
-							data-toggle="modal" data-target="#myModal_add" id="add-btn">Thêm</button>
-					<button th:if="${!action.equals('create')}" type="button" class="btn btn-warning pull-right" id="edit-btn" style="display:block;">Sửa</button>
-					<button th:if="${!action.equals('create')}" type="button" class="btn btn-primary pull-right" id="save-btn" style="display:block;"
-							data-toggle="modal" data-target="#myModal_save">Lưu</button>
+					<div sec:authorize="isAuthenticated()">
+						<button sec:authorize="hasRole('ADMIN')" th:if="${action.equals('create')}" type="button" class="btn btn-primary pull-right"  style="display:block;"
+								data-toggle="modal" data-target="#myModal_add" id="add-btn">Thêm</button>
+					</div>
+					<div sec:authorize="!isAuthenticated()">
+						<a  th:href="@{/login}">
+							<div class="btn btn-primary pull-right">Thêm</div>
+						</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						<button sec:authorize="hasRole('ADMIN')" th:if="${!action.equals('create')}" type="button" class="btn btn-warning pull-right" id="edit-btn" style="display:block;">Sửa</button>
+					</div>
+					<div sec:authorize="!isAuthenticated()">
+						<a th:href="@{/login}">
+							<div class="btn btn-warning pull-right" >Sửa</div>
+						</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						<button sec:authorize="hasRole('ADMIN')" th:if="${!action.equals('create')}" type="button" class="btn btn-primary pull-right" id="save-btn" style="display:block;"
+								data-toggle="modal" data-target="#myModal_save">Lưu</button>
+					</div>
+					<div sec:authorize="!isAuthenticated()">
+						<a th:href="@{/login}">
+							<div class="btn btn-primary pull-right" style="display:block;">Lưu</div>
+						</a>
+					</div>
 
 				</div>
 			</div>
