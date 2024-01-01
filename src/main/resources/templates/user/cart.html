@@ -333,31 +333,32 @@
 			return true; // Cho phép submit form
 		}
 
-    //     function validateForm() {
-    //         var checkboxes = document.getElementsByName("selectedItems");
-    //         var atLeastOneChecked = false;
-    //
-    //         for (var i = 0; i < checkboxes.length; i++) {
-    //             if (checkboxes[i].checked) {
-    //                 atLeastOneChecked = true;
-    //                 break;
-    //             }
-    //         }
-    //
-    //         if (!atLeastOneChecked) {
-    //         // alert("Vui lòng chọn ít nhất một mục để đặt hàng.");
-    //             Swal.fire({
-    //             position: 'top',
-    //             icon: 'warning',
-    //             title: 'Vui lòng chọn ít nhất một mục để đặt hàng',
-    //             showConfirmButton: false,
-    //             timer: 1500,
-    //             })
-    //             return false; // Ngăn chặn submit form
-    //         }
-    //
-    //     return true; // Cho phép submit form
-    // }
+        function validateForm() {
+            var checkboxes = document.querySelectorAll("input[type='checkbox'][id^='selectedItems']");
+            // chọn tất cả các phần tử checkbox có type là "checkbox" và id bắt đầu bằng "selectedItems"
+            var atLeastOneChecked = false;
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    atLeastOneChecked = true;
+                    break;
+                }
+            }
+
+            if (!atLeastOneChecked) {
+                // alert("Vui lòng chọn ít nhất một mục để đặt hàng.");
+                Swal.fire({
+                    position: 'top',
+                    icon: 'warning',
+                    title: 'Vui lòng chọn ít nhất một mục để đặt hàng',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                return false; // Ngăn chặn submit form
+            }
+
+            return true; // Cho phép submit form
+        }
 
   </script>
 </body>
