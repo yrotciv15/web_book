@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/edit-user/**", "/edit-product/**").access("hasRole('ROLE_ADMIN')");
 
 		//request cho User
-		http.authorizeRequests().antMatchers("/add-to-cart")
+		http.authorizeRequests().antMatchers("/add-to-cart", "/orders", "/manage-orderDetail/**")
 				.access("hasRole('ROLE_USER')");
 
 		http.authorizeRequests()
