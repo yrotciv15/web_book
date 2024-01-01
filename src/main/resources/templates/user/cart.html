@@ -311,27 +311,28 @@
 <script src="../js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
-		function validateQuantity(index) {
-      
-			var quantityInput = document.getElementById("quantity"+index);
-			var quantity = parseInt(quantityInput.value);
-			var numberInStock = parseInt(document.getElementById("numberInStock"+index).value);
-	
-			if (quantity > numberInStock) {
-				// alert("Số lượng thêm vào giỏ hàng vượt quá số lượng còn trong kho.");
-				Swal.fire({
-				position: 'top',
-				icon: 'error',
-				title: 'Số lượng thêm vượt quá <br> số lượng còn trong kho',
-				showConfirmButton: false,
-				timer: 1500,
-				})
-				quantityInput.focus();
-				return false; // Ngăn chặn submit form
-			}
-			
-			return true; // Cho phép submit form
-		}
+		// check số lượng
+        function validateQuantity(index) {
+
+            var quantityInput = document.getElementById("quantity"+index);
+            var quantity = parseInt(quantityInput.value);
+            var numberInStock = parseInt(document.getElementById("numberInStock"+index).value);
+
+            if (quantity > numberInStock) {
+                // alert("Số lượng thêm vào giỏ hàng vượt quá số lượng còn trong kho.");
+                Swal.fire({
+                    position: 'top',
+                    icon: 'error',
+                    title: 'Số lượng thêm vượt quá <br> số lượng còn trong kho',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+                quantityInput.focus();
+                return false; // Ngăn chặn submit form
+            }
+
+            return true; // Cho phép submit form
+        }
 
         function validateForm() {
             var checkboxes = document.querySelectorAll("input[type='checkbox'][id^='selectedItems']");
